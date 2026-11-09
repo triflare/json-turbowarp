@@ -1,0 +1,397 @@
+name: "JSON"
+version: "0.1.0"
+description: "The JSON TurboWarp extension, modified for use in Kamix 3."
+author: "Kamix"
+license: "Apache-2.0"
+
+entryPoint: "src/index.js"
+outputPath: "dist/extension.js"
+
+extension:
+  id: "json"
+  name: "JSON"
+  className: "JsonExtension"
+  color1: "#3271D0"
+  menus:
+    get_all:
+      items:
+        - text: "keys"
+          value: "keys"
+        - text: "values"
+          value: "values"
+        - text: "datas"
+          value: "datas"
+    get_list:
+      acceptReporters: true
+      items: "getListMenu"
+    types:
+      acceptReporters: true
+      items:
+        - text: "Object"
+          value: "Object"
+        - text: "Array"
+          value: "Array"
+    equal:
+      acceptReporters: true
+      items: ["=", "≠"]
+    sort_order:
+      acceptReporters: true
+      items:
+        - text: "ascending"
+          value: "ascending"
+        - text: "descending"
+          value: "descending"
+    analysis:
+      acceptReporters: true
+      items:
+        - text: "minimum value"
+          value: "minimum"
+        - text: "maximum value"
+          value: "maximum"
+        - text: "sum"
+          value: "sum"
+        - text: "average"
+          value: "average"
+        - text: "median"
+          value: "median"
+        - text: "mode"
+          value: "mode"
+        - text: "variance"
+          value: "variance"
+
+blocks:
+  - blockType: label
+    text: "General Utils"
+  - opcode: isValid
+    blockType: boolean
+    text: "is JSON [json] valid?"
+    arguments:
+      json:
+        type: string
+        defaultValue: '{"key":"value"}'
+  - opcode: is
+    blockType: boolean
+    text: "is [json] [types]?"
+    arguments:
+      json:
+        type: string
+        defaultValue: '{"key":"value"}'
+      types:
+        type: string
+        defaultValue: "Object"
+        menu: types
+  - "---"
+  - opcode: getAll
+    blockType: reporter
+    text: "all [Stype] of [json]"
+    arguments:
+      Stype:
+        type: string
+        menu: get_all
+      json:
+        type: string
+        defaultValue: '{"key":"value","key2":"value2"}'
+  - opcode: new
+    blockType: reporter
+    text: "new [json]"
+    arguments:
+      json:
+        type: string
+        defaultValue: "Object"
+        menu: types
+  - "---"
+  - opcode: hasKey
+    blockType: boolean
+    text: "[json] contains key [key]?"
+    arguments:
+      key:
+        type: string
+        defaultValue: "key2"
+      json:
+        type: string
+        defaultValue: '{"key":"value"}'
+  - opcode: hasValue
+    blockType: boolean
+    text: "[json] contains value [value]?"
+    arguments:
+      value:
+        type: string
+        defaultValue: "scratch"
+      json:
+        type: string
+        defaultValue: '["TurboWarp","scratch"]'
+  - opcode: equal
+    blockType: boolean
+    text: "[json1] [equal] [json2]"
+    arguments:
+      json1:
+        type: string
+        defaultValue: '{"a":0,"b":1}'
+      json2:
+        type: string
+        defaultValue: '{"b":1,"a":0}'
+      equal:
+        type: string
+        defaultValue: "="
+        menu: equal
+  - blockType: label
+    text: "JSON Strings"
+  - opcode: jsonLength
+    blockType: reporter
+    text: "length of json [json]"
+    arguments:
+      json:
+        type: string
+        defaultValue: '{"key":"value","key2":"value2"}'
+  - opcode: get
+    blockType: reporter
+    text: "value of [item] in [json]"
+    arguments:
+      item:
+        type: string
+        defaultValue: "key"
+      json:
+        type: string
+        defaultValue: '{"key":"value"}'
+  - opcode: set
+    blockType: reporter
+    text: "set [item] in [json] to [value]"
+    arguments:
+      item:
+        type: string
+        defaultValue: "key"
+      value:
+        type: string
+        defaultValue: "new value"
+      json:
+        type: string
+        defaultValue: '{"key":"value"}'
+  - opcode: delete
+    blockType: reporter
+    text: "delete [item] in [json]"
+    arguments:
+      item:
+        type: string
+        defaultValue: "key2"
+      json:
+        type: string
+        defaultValue: '{"key":"value","key2":"value2"}'
+  - blockType: label
+    text: "Array"
+  - opcode: length
+    blockType: reporter
+    text: "length of array [json]"
+    arguments:
+      json:
+        type: string
+        defaultValue: "[1,2,3]"
+  - opcode: arrayGet
+    blockType: reporter
+    text: "item [item] of array [json]"
+    arguments:
+      item:
+        type: number
+        defaultValue: 1
+      json:
+        type: string
+        defaultValue: '["scratch","TurboWarp"]'
+  - opcode: arrayPush
+    blockType: reporter
+    text: "add [item] to array [json]"
+    arguments:
+      item:
+        type: string
+        defaultValue: "TurboWarp"
+      json:
+        type: string
+        defaultValue: '["scratch"]'
+  - opcode: arraySet
+    blockType: reporter
+    text: "replace item [pos] of [json] with [item]"
+    arguments:
+      item:
+        type: string
+        defaultValue: "fav"
+      pos:
+        type: number
+        defaultValue: 2
+      json:
+        type: string
+        defaultValue: '["love","heart","follow"]'
+  - opcode: arrayInsert
+    blockType: reporter
+    text: "insert [item] at [pos] of array [json]"
+    arguments:
+      item:
+        type: string
+        defaultValue: "fav"
+      pos:
+        type: number
+        defaultValue: 2
+      json:
+        type: string
+        defaultValue: '["love","follow"]'
+  - "---"
+  - opcode: arrayDelete
+    blockType: reporter
+    text: "delete item [item] of array [json]"
+    arguments:
+      item:
+        type: number
+        defaultValue: 2
+      json:
+        type: string
+        defaultValue: '["scratch","a","TurboWarp"]'
+  - opcode: arrayRemoveAll
+    blockType: reporter
+    text: "delete all [item] in array [json]"
+    arguments:
+      item:
+        type: string
+        defaultValue: "a"
+      json:
+        type: string
+        defaultValue: '["scratch","a","TurboWarp","a","a"]'
+  - "---"
+  - opcode: arrayItemNumber
+    blockType: reporter
+    text: "item # of [item] in array [json]"
+    arguments:
+      item:
+        type: string
+        defaultValue: "scratch"
+      json:
+        type: string
+        defaultValue: '["scratch","TurboWarp"]'
+  - blockType: label
+    text: "Advanced"
+  - opcode: arrayFrom
+    blockType: reporter
+    text: "array from text [json]"
+    arguments:
+      json:
+        type: string
+        defaultValue: "abcd"
+  - opcode: arrayFromTo
+    blockType: reporter
+    text: "items [item] to [item2] of array [json]"
+    arguments:
+      json:
+        type: string
+        defaultValue: "[1,2,3,4]"
+      item:
+        type: number
+        defaultValue: 2
+      item2:
+        type: number
+        defaultValue: 3
+  - opcode: arrayReverse
+    blockType: reporter
+    text: "reverse array [json]"
+    arguments:
+      json:
+        type: string
+        defaultValue: '["a","b","c","d","e","f"]'
+  - opcode: arrayFlat
+    blockType: reporter
+    text: "flat array [json] by depth [depth]"
+    arguments:
+      json:
+        type: string
+        defaultValue: "[[1],2,[3,4],[5,[6]]]"
+      depth:
+        type: number
+        defaultValue: 2
+  - opcode: arrayConcat
+    blockType: reporter
+    text: "array concat [json] [json2]"
+    arguments:
+      json:
+        type: string
+        defaultValue: '["a","b"]'
+      json2:
+        type: string
+        defaultValue: '["c","d"]'
+  - opcode: arrayFilter
+    blockType: reporter
+    text: "get all values with key [key] in array [json]"
+    arguments:
+      key:
+        type: string
+        defaultValue: "id"
+      json:
+        type: string
+        defaultValue: '[{"id":12},{"id":24}]'
+  - opcode: arraySetLength
+    blockType: reporter
+    text: "set length of array [json] to [len]"
+    arguments:
+      json:
+        type: string
+        defaultValue: '["a","b","c"]'
+      len:
+        type: number
+        defaultValue: 2
+  - "---"
+  - opcode: arrayCreate
+    blockType: reporter
+    text: "create array by [text] with delimiter [d]"
+    arguments:
+      text:
+        type: string
+        defaultValue: "a,b,c"
+      d:
+        type: string
+        defaultValue: ","
+  - opcode: arrayJoin
+    blockType: reporter
+    text: "join string by array [json] with delimiter [d]"
+    arguments:
+      json:
+        type: string
+        defaultValue: '["a","b","c"]'
+      d:
+        type: string
+        defaultValue: ","
+  - "---"
+  - opcode: arraySort
+    blockType: reporter
+    text: "sort array [list] in [order] order"
+    disableMonitor: true
+    arguments:
+      list:
+        type: string
+        defaultValue: "[5.23, 214, 522, 61, 5.24, 62.2, 1, 51212, 0, 0]"
+      order:
+        type: string
+        menu: sort_order
+  - opcode: arrayAnalysis
+    blockType: reporter
+    text: "[analysis] of array [list]"
+    disableMonitor: true
+    arguments:
+      list:
+        type: string
+        defaultValue: "[17, 1, 2017, 0, 120, 14]"
+      analysis:
+        type: string
+        menu: analysis
+  - blockType: label
+    text: "Lists"
+  - opcode: vmGetList
+    blockType: reporter
+    text: "get list [list] as array"
+    arguments:
+      list:
+        type: string
+        menu: get_list
+  - opcode: vmSetList
+    blockType: command
+    text: "set list [list] to [json]"
+    arguments:
+      list:
+        type: string
+        menu: get_list
+      json:
+        type: string
+        defaultValue: '["apple","banana"]'

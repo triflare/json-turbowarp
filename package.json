@@ -1,0 +1,26 @@
+{
+  "name": "@triflare/json-turbowarp",
+  "version": "0.1.0",
+  "description": "The JSON TurboWarp extension, modified for use in Kamix 3.",
+  "homepage": "https://github.com/triflare/json-turbowarp#readme",
+  "bugs": {
+    "url": "https://github.com/triflare/json-turbowarp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/triflare/json-turbowarp.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Triflare",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "extend build",
+    "dev": "extend dev",
+    "package": "extend pack",
+    "validate": "extend validate"
+  },
+  "devDependencies": {
+    "@triflare/extend": "^0.2.0"
+  }
+}
