@@ -4,7 +4,7 @@
 
 # JSON
 
-![version](https://twexts.sdisk.us/api/v2/badge/@kamix/json/version) ![downloads](https://twexts.sdisk.us/api/v2/badge/@kamix/json/downloads) ![license](https://twexts.sdisk.us/api/v2/badge/@kamix/json/license)
+![version](https://marketplace.sdisk.us/api/v1/badge/@kamix/json/version) ![downloads](https://marketplace.sdisk.us/api/v1/badge/@kamix/json/downloads) ![license](https://marketplace.sdisk.us/api/v1/badge/@kamix/json/license)
 
 _The JSON TurboWarp extension, modified for use in Kamix 3._
 
